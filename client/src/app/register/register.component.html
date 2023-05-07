@@ -1,0 +1,42 @@
+<form
+  #registerForm="ngForm"
+  (ngSubmit)="register()"
+  autocomplete="off"
+>
+  <h1 class="h3 mb-3 fw-bold text-center">Register</h1>
+
+  <div class="form-floating mb-1">
+    <input
+      type="text"
+      name ="username"
+      [(ngModel)]="model.userName"
+      class="form-control"
+      id="usernameInput"
+      placeholder="name@example.com"
+    />
+    <label for="usernameInput">Email address</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+      type="password"
+      class="form-control"
+      id="passwordInput"
+      placeholder="Password"
+    />
+    <label for="passwordInput">Password</label>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary me-2" type="submit">Sign in</button>
+    <button class="btn btn-outline-primary" type="button" (click)="cancel()">Cancel</button>
+  </div>
+  
+  <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+  <div>
+    <ul>
+      <li *ngFor="let user of usersFromHomeComponent">{{user.userName}}</li>
+    </ul>
+  </div>
+</form>
