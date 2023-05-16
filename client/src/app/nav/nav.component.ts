@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Observable, of } from 'rxjs';
 import { User } from '../_models/User';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -15,23 +17,22 @@ import { User } from '../_models/User';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService: AccountService) { } // Inject Service
+  constructor(public accountService: AccountService,private router: Router, private toastr: ToastrService) { } // Inject Service
 
   ngOnInit(): void {
   }
 
   login(){
     this.accountService.login(this.model).subscribe({
-      next: res => {
-        console.log(res);
-      },
+      next: _ => this.router.navigateByUrl('/members'),
       error: err => {
-       console.log(err);
+       this.toastr.error(err.error);
       },
     })
   }
 
   logout(){
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }
