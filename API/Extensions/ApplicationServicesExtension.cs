@@ -1,4 +1,5 @@
 using API.Data;
+using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -12,6 +13,8 @@ namespace API.Extensions
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
             Services.AddCors();
+            Services.AddTransient<IUserRepository, UserRepository>();
+            Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return Services;
         }
 
